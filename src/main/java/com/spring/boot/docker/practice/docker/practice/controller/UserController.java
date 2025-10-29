@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/users")
 @Slf4j
 public class UserController {
@@ -16,11 +17,6 @@ public class UserController {
 
     public UserController(UserRepository repo) {
         this.repo = repo;
-    }
-
-    @GetMapping
-    public List<User> getAllUsers() {
-        return repo.findAll();
     }
 
     @PostMapping
@@ -36,5 +32,11 @@ public class UserController {
 
         log.info("records added, with user email{}", creUser.getEmail());
         return creUser;
+    }
+
+    @GetMapping
+    public List<User> getUser() {
+        log.info("records fetching started.... ");
+        return repo.findAll();
     }
 }
